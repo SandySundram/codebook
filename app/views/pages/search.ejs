@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<!-- Page body -->
+        <div class="container">
+			<% if (typeof error == 'undefined'){ %>
+				<h1 class="text-center">Results for "<%= searchTerm %>"</h1>
+				<div class="list-group">
+					<% for(key in results){ %>
+						<a class="list-group-item list-group-item-action" href='/profile/<%= results[key].id %>'><%= results[key].first_name+' '+results[key].last_name %></a>
+						<!-- <div class="searchResultRow"></div>	 -->
+					<% } %>
+				</div>	
+			<% } else{ %>
+				<h1 class="text-center">No Results for "<%= searchTerm %>"</h1>
+			<% } %>
+        </div>
+	</main>>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+	
+</body>
+</html>

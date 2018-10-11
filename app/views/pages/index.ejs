@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" id="index-html">
+<head>
+	<% include ../partials/head %>
+</head>
+<body id="index-body">
+
+	<header>
+		<% include ../partials/index-header %>
+	</header>
+	
+	<main id="index-main">
+		<% 	if(typeof url == 'undefined'){ %>
+			<p id="particleCount">Git Repo Count particle diagram</p>	
+		<% } %>
+		<!-- Page body -->
+			<object 
+				<% if(typeof url == 'undefined'){ %>
+					data="/particle/<%= repoCount %>"
+				<% } else{ %>
+					data="<%= url %>"
+				<% } %> type=""></object>
+	</main>
+	<!-- https://tayloraanenson.github.io/star-wars-rpg/ -->
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" id="edit-profile-html">
+<head>
+	<% include ../partials/head %>
+</head>
+<body id="edit-profile-body">
+
+	<header id="edit-profile-header">
+		<% include ../partials/header %>
+	</header>
+
+	<main id="edit-profile-main">
+		<div id="update-gif"></div>
+		<!-- Page body -->
+		<div class="container" id="edit-profile-container">
+			<form method="POST" action="/edit-profile" class="needs-validation" encType="multipart/form-data" novalidate="">
+				<div class="form-row">
+					<div>
+						<label id="edit-profile-pic" for="pic-upload">
+							<img src="/assets/imgs/placeholder-image10.jpg" alt="Placeholder Pic" class="rounded" id="placeholder-pic">
+							<img src="/images/<%= userInfo.photourl %>" alt="User Pic" class="image-thumbnail rounded" id="user-pic">
+ 						</label>
+						<!-- <input type="file" name="photourl" class="form-control" id="pic-upload" accept="image/*" required=""> -->
+						<input type="file" name="photourl" class="form-control" id="pic-upload" accept="image/*">
+						<input type="hidden" name="photourl2" value="<%= userInfo.photourl %>">
+						<!-- <div class="valid-feedback">
+							Nice pic!
+						</div>
+						<div class="invalid-feedback">
+							Please select a profile picture.
+						</div> -->
+					</div>
+					<div class="container" id="edit-container">
+						<div class="" id="edit-first-name">
+							<label for="validationCustom01">First name</label>
+							<input type="text" name="first_name" class="form-control" id="validationCustom01" value="<%= userInfo.first_name %>" placeholder="..." required="">
+							<div class="valid-feedback">
+								Looks good!
+							</div>
+							<div class="invalid-feedback">
+								You must enter your first name.
+							</div>
+						</div>
+						<div class="" id="edit-last-name">
+						<label for="validationCustom02">Last name</label>
+							<input type="text" name="last_name" class="form-control" id="validationCustom02" value="<%= userInfo.last_name %>" placeholder="..." required="">
+							<div class="valid-feedback">
+								Great!
+							</div>
+							<div class="invalid-feedback">
+								You must enter your last name.
+							</div>
+						</div>
+						<div class="" id="edit-email">
+							<label for="validationCustom03" id="edit-email-label">Email</label>
+							<input type="text" name="email_address" class="form-control" id="validationCustom03" value="<%= userInfo.email_address %>" placeholder="..." required="">
+							<div class="valid-feedback">
+								Affirmitive!
+							</div>
+							<div class="invalid-feedback">
+								Please provide a valid email.
+							</div>
+						</div>
+						<div class="" id="edit-github">
+							<label for="validationCustom04">GitHub Username | <button class="btn btn-light" id="repo-btn">Pull Repos</button> </label>
+
+							<input type="text" name="gitlink" class="form-control" id="validationCustom04" value="<%=  userInfo.gitlink %>" placeholder="...">
+							<div class="valid-feedback">
+								Wicked!
+							</div>
+							<div class="invalid-feedback">
+								You must pull your repos from GitHub.
+							</div>
+						</div>
+						<div id="pull-success">Please select the repos you would like to show off on the home page</div>
+						<div id="github-selection"></div>
+						<div class="" id="edit-github">
+							<label for="validationCustom05">LinkedIn Username</label>
+							<input type="text" name="linkedin" class="form-control" id="validationCustom05" value="<%= userInfo.linkedin %>" placeholder="...">
+							<!-- <div class="valid-feedback">
+								Radical!
+							</div>
+							<div class="invalid-feedback">
+								Please provide your LinkedIn username.
+							</div> -->
+						</div>
+					</div>
+					<button class="btn btn-secondary btn-block" id="update-btn" type="submit">Update</button>
+				</div>
+			</form>
+		</div>
+		<div class="container" id="profile-generator">
+			<p id="generator-p">Building Profile</p>
+		</div>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+	
+</body>
+</html>

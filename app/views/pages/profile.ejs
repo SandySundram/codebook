@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<% include ../partials/profile-head %>
+</head>
+<body>
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<!-- Page body -->
+		<div class="container" id="profile-container">
+      		<div class="form-row">
+				<% if (typeof error != 'undefined') {%>
+					<p><%= error %></p>
+				<%}%>
+				<% if (typeof results != 'undefined') {%>
+					<div id="left-container">
+					<div class="container" id="profile-info-container">
+						<label id="profile-pic">
+							<!-- <img src="<%= ((typeof results != 'undefined') && (typeof results.photourl != 'undefined')) ? '/images/'+results.photourl : '' %>" alt="User Pic" class="rounded" id="user-pic"> -->
+							<img src="/assets/imgs/image_placeholder.jpeg" alt="Placeholder Pic" class="rounded" id="placeholder-pic">
+							<img src='/images/<%= results.photourl %>' alt="User Pic" class="rounded" id="user-pic">
+						</label>
+						<div id="user-info">
+							<p><%= results.first_name %> <%= results.last_name %></p>
+							<p><%= results.email_address %></p>
+							<% if(results.gitlink == null || results.gitlink == ""){ %>
+								<div id="github-link"><a href="/edit-profile" target="_blank">Add a Github link</a></div>
+							<% }else { %>
+								<div id="github-link"><a href="https://github.com/<%= results.gitlink %>" target="_blank">GitHub</a></div>
+							<% } %>
+							<% if(results.linkedin == null || results.linkedin == ""){ %>
+								<a href="/edit-profile" target="_blank">Add a LinkedIn link</a>
+							<% }else { %>
+								<a href="https://www.linkedin.com/in/<%= results.linkedin %>" target="_blank">LinkedIn</a>
+							<% } %>
+							
+							
+						</div>
+					</div>
+					<div class="container" id="message-board-container">
+						<div id="read-message">
+							<% if (typeof messages != 'undefined'){
+								var colorCount = 0;
+								for (var key in messages){
+									colorCount++ %>
+									<p id='eachMessage' style="background-color:<% if ((colorCount%2)!=0){ %>
+										<%= '#e3e4e7' %> <% } else{ %> <%= 'white' %> <% } %>">
+									<span id="time-posted"> <%= messages[key].timeEntered %> </span>
+									<br>
+									<span id="sender-posted"><%= messages[key].sender %></span><%= ': '+messages[key].user_message %></p>
+									<!-- messages[key].timeEntered+', '+ -->
+								<% }
+							} %>
+						</div>
+						<div id="write-message">
+							<form method="POST" action="/message" id="message-input">
+								<textarea class="form-control" id="textArea" name="user_message" placeholder="Post a message" rows="3"></textarea>
+								<input type="text" name="id" id="hiddenMessageInput">
+								<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="message-btn">Post</button>
+							</form>
+						</div>
+					</div>
+				</div>
+					<div class="container" id="user-repos">
+						<% for(var val of results.git_repos){%>
+							<a href="<%=val.githubpage%>" target="_blank" id="link"><img src=<%='/images/'+val.screenshot%> alt="<%=val.name%>" class="repo-screenshots" data-toggle="tooltip" title="<%=val.name%>"></a>
+						<%}%>
+					</div>
+				<%}%>
+			
+		</div>
+	</main>
+
+	<footer>
+		<% include ../partials/profile-footer %>
+	</footer>
+	<script type="text/javascript">
+		$(document).ready ( function(){
+		var path = window.location.href.split('/');
+		var length = path.length;
+		path = path[length-1];
+			
+		console.log(path);
+		$("#hiddenMessageInput").val(path);
+		 })
+	</script>
+</body>
+</html>
